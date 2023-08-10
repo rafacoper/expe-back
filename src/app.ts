@@ -1,28 +1,13 @@
-import express from 'express';
-import { Client } from 'pg';
+// src/index.ts
+import express from "express";
+import { userRoutes } from "./routes";
 
 const app = express();
 
-const client = new Client({
-  user: "postgres",
-  host: process.env.HOST,
-  database: process.env.POSTGRES_DB,
-  password: "Welcome",
-  port: Number(process.env.PORT),
-});
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-
-app.get('/api/users', async (req, res) => {
-  try {
-    await client.connect();
-    const result = await client.query('SELECT $1::text as message', ['Hello world!']);
-    console.log(result.rows[0].message)
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await client.end();
-  }
-});
+app.use("/api/users", userRoutes);
 
 const PORT = 5800;
 app.listen(PORT, () => {
