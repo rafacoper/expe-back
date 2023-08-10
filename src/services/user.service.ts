@@ -19,7 +19,12 @@ export const UserService = {
   },
 
   async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
-        const userCreated = await User.create(userData);
-        return userCreated;
+    const userCreated = await User.create(userData);
+    return userCreated;
   },
+
+  async getUser(id: number) {
+    const user = await User.findByPk(id);
+    return user;
+  }
 };
