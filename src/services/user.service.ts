@@ -18,18 +18,8 @@ export const UserService = {
     return result
   },
 
-  // async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
-  //   const values = [
-  //     userData.email,
-  //     userData.areacode,
-  //     userData.phone,
-  //     userData.name,
-  //     userData.lastName,
-  //     userData.password,
-  //     userData.birth,
-  //   ];
-  //   const result = await client.query(query, values);
-  //   client.release();
-  //   return result.rows[0];
-  // },
+  async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
+        const userCreated = await User.create(userData);
+        return userCreated;
+  },
 };

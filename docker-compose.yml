@@ -1,12 +1,36 @@
 version: '3.8'
 
-services: 
-  postgress: 
+services:
+  node:
+    container_name: node-service
+    image: node:18
+    restart: always
+    working_dir: /app
+    env_file:
+      - .env
+    ports:
+      - 3003:3003
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres
+    networks:
+      - node-postgres-network
+
+  postgres:
+    container_name: postgres-db
     image: postgres
     restart: always
     env_file:
       - .env
-    ports: 
+    ports:
       - 5432:5432
     platform: linux/x86_64
-    
+    networks:
+      - node-postgres-network
+
+networks:
+    node-postgres-network:
+      driver: bridge

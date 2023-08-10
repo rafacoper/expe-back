@@ -1,6 +1,6 @@
 const config = {
-  username: "rafacoper",
-  password: "DrRl*2023#",
+  username: "postgres",
+  password: "postgres",
   database: "exke",
   host: "localhost",
   dialect: 'postgres',
