@@ -14,8 +14,10 @@ interface UserData {
 
 export const UserService = {
   async getAllUsers(): Promise<UserData[]> {
-    const result = await User.findAll()
-    return result
+    const result = await User.findAll({
+      attributes: { exclude: "password" },
+    });
+    return result;
   },
 
   async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
@@ -24,7 +26,9 @@ export const UserService = {
   },
 
   async getUser(id: number) {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: { exclude: "password" },
+    });
     return user;
   }
 };
