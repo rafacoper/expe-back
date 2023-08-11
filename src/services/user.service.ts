@@ -1,5 +1,5 @@
 // import { User } from "../models"
-const { User } = require("../models")
+const { User } = require("../database/models")
 
 interface UserData {
   id: number;
