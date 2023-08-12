@@ -35,15 +35,25 @@ export const UserController = {
     }
   },
   async updateUser(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const user = req.body;
-    const updatedUser = await UserService.updateUser(Number(id), user);
-    return res.status(200).json(updatedUser);
+    try {
+      const { id } = req.params;
+      const user = req.body;
+      const updatedUser = await UserService.updateUser(Number(id), user);
+      return res.status(200).json(updatedUser);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "An error occurred" });
+    }
   },
 
   async deleteUser(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    await UserService.deleteUser(Number(id));
-    return res.status(203).end();
+    try {
+      const { id } = req.params;
+      await UserService.deleteUser(Number(id));
+      return res.status(203).end();
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "An error occurred" });
+    }
   },
 };
