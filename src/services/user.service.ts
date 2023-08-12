@@ -25,10 +25,19 @@ export const UserService = {
     return userCreated;
   },
 
-  async getUser(id: number) {
+  async getUser(id: number): Promise<UserData> {
     const user = await User.findByPk(id, {
       attributes: { exclude: "password" },
     });
     return user;
-  }
+  },
+
+  async updateUser(id: number, user: UserData): Promise<UserData> {
+    const userUpdated = await User.update(id, { user });
+    return userUpdated;
+  },
+
+  async deleteUser(id: number): Promise<void> {
+    await User.destroy(id);
+  },
 };

@@ -13,7 +13,7 @@ module.exports = {
           areacode: "+1",
           phone: "1234567890",
           password: "password1",
-          birth: "1990-01-01",
+          birth: "1990-11-01",
         },
         {
           email: "user2@example.com",

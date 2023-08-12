@@ -34,4 +34,11 @@ export const UserController = {
       return res.status(500).json({ error: "An error occurred" });
     }
   },
+  async updateUser() {
+    return;
+  },
+
+  async deleteUser() {
+    return;
+  },
 };
