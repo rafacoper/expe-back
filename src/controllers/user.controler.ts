@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { UserService } from "../services/user.service";
 
 export const UserController = {
-  async getAllUsers(_req: Request, res: Response) {
+  async getAllUsers(_req: Request, res: Response): Promise<Response> {
     try {
       const users = await UserService.getAllUsers();
       return res.json(users);
@@ -13,7 +13,7 @@ export const UserController = {
     }
   },
 
-  async getUserById(req: Request, res: Response) {
+  async getUserById(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
       const user = await UserService.getUser(Number(id));
@@ -24,7 +24,7 @@ export const UserController = {
     }
   },
 
-  async createUser(req: Request, res: Response) {
+  async createUser(req: Request, res: Response): Promise<Response> {
     const userData = req.body;
     try {
       const newUser = await UserService.createUser(userData);
@@ -34,11 +34,16 @@ export const UserController = {
       return res.status(500).json({ error: "An error occurred" });
     }
   },
-  async updateUser() {
-    return;
+  async updateUser(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const user = req.body;
+    const updatedUser = await UserService.updateUser(Number(id), user);
+    return res.status(200).json(updatedUser);
   },
 
-  async deleteUser() {
-    return;
+  async deleteUser(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    await UserService.deleteUser(Number(id));
+    return res.status(203).end();
   },
 };
