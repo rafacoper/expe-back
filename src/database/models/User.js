@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       deletedAt: DataTypes.DATE,
     },
     {
+      paranoid: true,
       underscored: true,
     }
   );
