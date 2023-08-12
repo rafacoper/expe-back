@@ -50,7 +50,7 @@ export const UserController = {
     try {
       const { id } = req.params;
       await UserService.deleteUser(Number(id));
-      return res.status(203).end();
+      return res.status(204).end();
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: "An error occurred" });

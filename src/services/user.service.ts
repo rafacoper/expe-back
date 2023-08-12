@@ -33,11 +33,13 @@ export const UserService = {
   },
 
   async updateUser(id: number, user: UserData): Promise<UserData> {
-    const userUpdated = await User.update(id, { user });
+    const userUpdated = await User.update({ where: { id } }, { user });
     return userUpdated;
   },
 
   async deleteUser(id: number): Promise<void> {
-    await User.destroy(id);
+    await User.destroy({
+      where: { id }
+    });
   },
 };
