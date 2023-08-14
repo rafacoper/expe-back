@@ -12,6 +12,4 @@ app.get("/check", (req, res) => res.send("server up"));
 
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

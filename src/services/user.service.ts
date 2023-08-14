@@ -33,7 +33,7 @@ export const UserService = {
   },
 
   async updateUser(id: number, user: UserData): Promise<UserData> {
-    const userUpdated = await User.update({ where: { id } }, { user });
+    const userUpdated = await User.update({ where: { id } }, user);
     return userUpdated;
   },
 
