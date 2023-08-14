@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { UserService } from "../services/user.service";
 
 export const UserController = {
-  async getAllUsers(_req: Request, res: Response): Promise<Response> {
+  async getAllUsers(req: Request, res: Response): Promise<Response> {
     try {
       const users = await UserService.getAllUsers();
       return res.json(users);

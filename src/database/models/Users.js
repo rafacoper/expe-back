@@ -9,19 +9,32 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       name: DataTypes.STRING,
-      lastName: DataTypes.STRING,
+      lastName: {
+        type: DataTypes.STRING,
+        field: 'last_name'
+      },
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
       birth: DataTypes.DATEONLY,
       areacode: DataTypes.STRING,
       password: DataTypes.STRING,
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.DATE,
-      deletedAt: DataTypes.DATE,
+      createdAt: {
+        type: DataTypes.DATE,
+        field: 'created_at'
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: 'updated_at'
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        field: 'deleted_at'
+      },
     },
     {
       paranoid: true,
       underscored: true,
+      tableName: 'Users',
     }
   );
 

@@ -22,7 +22,7 @@ module.exports = {
       updatedAt: {
         allowNull: true,
         type: Sequelize.DATE,
-        field: "update_at",
+        field: "updated_at",
       },
       deletedAt: {
         allowNull: true,
