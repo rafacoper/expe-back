@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     underscored: true,
     tableName: 'groceries',
-    modelName: 'groceries',
+    modelName: 'Grocery',
   });
 
   Grocery.associate = (models) => {

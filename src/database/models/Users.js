@@ -9,10 +9,13 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: DataTypes.STRING,
+      firstName:{
+        type: DataTypes.STRING,
+        field: "first_name",
+      },
       lastName: {
         type: DataTypes.STRING,
-        field: 'last_name'
+        field: "last_name",
       },
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
@@ -21,26 +24,26 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       createdAt: {
         type: DataTypes.DATE,
-        field: 'created_at'
+        field: "created_at",
       },
       updatedAt: {
         type: DataTypes.DATE,
-        field: 'updated_at'
+        field: "updated_at",
       },
       deletedAt: {
         type: DataTypes.DATE,
-        field: 'deleted_at'
+        field: "deleted_at",
       },
     },
     {
       paranoid: true,
       underscored: true,
-      tableName: 'Users',
+      tableName: "Users",
     }
   );
 
   User.associate = (models) => {
-    User.hasMany(models.Grocery, { foreignKey: 'userId' });
+    User.hasMany(models.Grocery, { foreignKey: "userId" });
   };
 
   return User;
