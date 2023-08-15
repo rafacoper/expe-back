@@ -1,4 +1,5 @@
-// models/User.js
+const Grocery = require("./Grocery");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
@@ -37,6 +38,8 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'Users',
     }
   );
+
+  User.hasMany(Grocery, { foreignKey: 'userId' });
 
   return User;
 };
