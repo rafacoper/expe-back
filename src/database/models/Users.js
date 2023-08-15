@@ -39,7 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.hasMany(Grocery, { foreignKey: 'userId' });
+  User.associate = (models) => {
+    User.hasMany(models.Grocery, { foreignKey: 'userId' });
+  };
 
   return User;
 };
