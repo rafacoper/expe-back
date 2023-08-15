@@ -14,9 +14,11 @@ interface UserData {
 
 export const UserService = {
   async getAllUsers(): Promise<UserData[]> {
-    const result = await User.findAll();
-    console.log('USER', result);
-    
+    const result = await User.findAll(
+      {
+        attributes: { exclude: "password" },
+      }
+    );
     return result;
   },
 
