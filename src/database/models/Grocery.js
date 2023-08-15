@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       userId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       sellerId: {
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Grocery.associate = (models) => {
-    Grocery.belongsTo(models.User, { foreignKey: 'userId' });
+    Grocery.belongsTo(models.User, { foreignKey: 'id' });
   };
 
   return Grocery;
