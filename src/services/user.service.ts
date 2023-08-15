@@ -7,7 +7,7 @@ interface UserData {
   email: string;
   areacode: string;
   phone: string;
-  name: string;
+  firstName: string;
   lastName: string;
   password: string;
   birth: Date;
