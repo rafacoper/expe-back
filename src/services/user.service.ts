@@ -1,5 +1,6 @@
 // import { User } from "../models"
 const { User } = require("../database/models")
+import bcrypt from "bcrypt";
 
 interface UserData {
   id: number;
@@ -14,16 +15,16 @@ interface UserData {
 
 export const UserService = {
   async getAllUsers(): Promise<UserData[]> {
-    const result = await User.findAll(
-      {
-        attributes: { exclude: "password" },
-      }
+    const result = await User.findAll({ attributes: { exclude: "password" } }
     );
     return result;
   },
 
   async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
-    const userCreated = await User.create(userData);
+    const { password } = userData;
+    const saltRounds = 10;
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+    const userCreated = await User.create({ ...userData, password: hashedPassword });
     return userCreated;
   },
 
