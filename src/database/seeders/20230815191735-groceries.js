@@ -1,12 +1,11 @@
-'use strict';
+const { Grocery } = require("../models")
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('groceries', [
+  async up (_queryInterface, _Sequelize) {
+    const groceriesData= [
       {
         userId: 1,
-        sellerId: 'A1',
+        sellerId: '1',
         totalValue: 100.00,
         icmsPaid: 10.00,
         icmsBasis: 8.00,
@@ -31,10 +30,12 @@ module.exports = {
         productList: 'Something C',
         createdAt: new Date(),
       },
-    ]);
+    ];
+
+    await Grocery.bulkCreate(groceriesData)
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.bulkDelete('groceries', null, {});
   },
 };
