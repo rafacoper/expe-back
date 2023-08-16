@@ -12,7 +12,9 @@ module.exports = {
         allowNull: false,
         field: "user_id",
         references: {
-          model: "users",
+          model: {
+            tableName: 'users',
+          },
           key: "id",
         },
         onDelete: "CASCADE",
@@ -39,7 +41,7 @@ module.exports = {
         allowNull: false,
       },
       productList: {
-        field: "productList",
+        field: "product_list",
         type: Sequelize.TEXT,
         allowNull: false,
       },

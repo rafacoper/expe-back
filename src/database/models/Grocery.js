@@ -1,5 +1,3 @@
-const User = require('./Users');
-
 module.exports = (sequelize, DataTypes) => {
   const Grocery = sequelize.define(
     "Grocery",
@@ -11,34 +9,51 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        field: "user_id",
+        allowNull: false, 
       },
       sellerId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        field: "seller_id",
         allowNull: false,
       },
       totalValue: {
         type: DataTypes.DECIMAL(10, 2),
+        field: "total_value",
         allowNull: false,
       },
       icmsPaid: {
         type: DataTypes.DECIMAL(10, 2),
+        field: "icms_paid",
         allowNull: false,
       },
       icmsBasis: {
         type: DataTypes.DECIMAL(10, 2),
+        field: "icms_basis",
         allowNull: false,
       },
       productList: {
         type: DataTypes.TEXT,
+        field: "product_list",
         allowNull: false,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        field: "created_at",
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: "updated_at",
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        field: "deleted_at",
       },
   },
   {
     paranoid: true,
     underscored: true,
     tableName: 'groceries',
-    modelName: 'Grocery',
   });
 
   Grocery.associate = (models) => {

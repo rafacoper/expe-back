@@ -1,5 +1,3 @@
-const Grocery = require("./Grocery");
-
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
@@ -20,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
       birth: DataTypes.DATEONLY,
-      areacode: DataTypes.STRING,
+      areacode: {
+        type: DataTypes.STRING,
+        field: "area_code",
+      },
       password: DataTypes.STRING,
       createdAt: {
         type: DataTypes.DATE,
@@ -38,12 +39,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       paranoid: true,
       underscored: true,
-      tableName: "Users",
+      tableName: "users",
     }
   );
 
   User.associate = (models) => {
-    User.hasMany(models.Grocery, { foreignKey: "userId" });
+    User.hasMany(models.Grocery, { foreignKey: "user_id" });
   };
 
   return User;
