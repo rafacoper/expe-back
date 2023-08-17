@@ -1,30 +1,15 @@
-import express from 'express';
-import { Client } from 'pg';
-
-const app = express();
-
-const client = new Client({
-  user: "postgres",
-  host: process.env.HOST,
-  database: process.env.POSTGRES_DB,
-  password: "Welcome",
-  port: Number(process.env.PORT),
-});
-
-
-app.get('/api/users', async (req, res) => {
-  try {
-    await client.connect();
-    const result = await client.query('SELECT $1::text as message', ['Hello world!']);
-    console.log(result.rows[0].message)
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await client.end();
-  }
-});
+// src/index.ts
+import express, { Request, Response} from "express";
+import { userRoutes } from "./routes";
 
 const PORT = 5800;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/check", (_req: Request, res: Response) => res.send("server up"));
+
+app.use("/user", userRoutes);
+
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
