@@ -15,7 +15,6 @@ export const UserService = {
   async getAllUsers(): Promise<UserData[]> {
     try {
       const result = await User.findAll();
-      console.log('USER', result);
       return result;
     } catch (error) {
       throw error
