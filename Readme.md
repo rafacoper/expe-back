@@ -38,7 +38,7 @@ To run the Expense Tracker App locally, follow these steps:
 
 3. **Install Dependencies**: `npm install`
 
-4. **Set Up PostgreSQL Database**: Create a PostgreSQL database and update the connection configuration in `config/database.js`.
+4. **Set Up PostgreSQL Database**: Create a PostgreSQL database and update the connection configuration in `config/config.js`.
 
 5. **Start the Application**: `npm start`
 
