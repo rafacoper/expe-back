@@ -6,7 +6,7 @@ export const UserController = {
   async getAllUsers(req: Request, res: Response): Promise<Response> {
     try {
       const users = await UserService.getAllUsers();
-      return res.json(users);
+      return res.status(200).json(users);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: "An internal error occurred" });
@@ -17,7 +17,10 @@ export const UserController = {
     try {
       const { id } = req.params;
       const user = await UserService.getUser(Number(id));
-      return res.json(user);
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+      return res.status(200).json(user);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: "An internal error occurred" });

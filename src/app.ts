@@ -1,5 +1,5 @@
 // src/index.ts
-import express from "express";
+import express, { Request, Response} from "express";
 import { userRoutes } from "./routes";
 
 const PORT = 5800;
@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/check", (req, res) => res.send("server up"));
+app.get("/check", (_req: Request, res: Response) => res.send("server up"));
 
 app.use("/user", userRoutes);
 

@@ -1,4 +1,5 @@
 const { User } = require("../database/models")
+import bcrypt from "bcrypt";
 
 interface UserData {
   firstName: string;
@@ -23,7 +24,10 @@ export const UserService = {
 
   async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
     try {
-      const userCreated = await User.create(userData);
+      const { password } = userData;
+      const saltRounds = 10;
+      const hashedPassword = bcrypt.hashSync(password, saltRounds);
+      const userCreated = await User.create({ ...userData, password: hashedPassword });
       return userCreated;
     } catch (error) {
       throw error;

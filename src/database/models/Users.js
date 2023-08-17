@@ -8,33 +8,21 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: DataTypes.STRING,
-      lastName: {
-        type: DataTypes.STRING,
-        field: 'last_name'
-      },
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
       birth: DataTypes.DATEONLY,
       areacode: DataTypes.STRING,
       password: DataTypes.STRING,
-      createdAt: {
-        type: DataTypes.DATE,
-        field: 'created_at'
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        field: 'updated_at'
-      },
-      deletedAt: {
-        type: DataTypes.DATE,
-        field: 'deleted_at'
-      },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
+      deletedAt: DataTypes.DATE,
     },
     {
       paranoid: true,
       underscored: true,
-      tableName: 'Users',
+      tableName: "users",
     }
   );
 
