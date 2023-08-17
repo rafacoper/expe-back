@@ -1,6 +1,6 @@
 # Expense Tracker App
 
-![Expense Tracker App](app_screenshot.png)
+[Expense Tracker App](app_screenshot.png)
 
 The Expense Tracker App is a Node.js application that allows users to efficiently manage their expenses by capturing and storing images of invoices using their phone's camera. The app leverages the power of Node.js, Sequelize, Docker, and PostgreSQL to provide users with a seamless experience in organizing their expenses, tracking spending patterns, and gaining insights into their purchasing habits.
 
