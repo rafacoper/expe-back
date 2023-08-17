@@ -5,7 +5,7 @@ module.exports = {
     const groceriesData= [
       {
         userId: 1,
-        sellerId: '1',
+        sellerId: 1,
         totalValue: 100.00,
         icmsPaid: 10.00,
         icmsBasis: 8.00,
@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         userId: 1,
-        sellerId: '1',
+        sellerId: 1,
         totalValue: 120.00,
         icmsPaid: 15.00,
         icmsBasis: 4.00,
