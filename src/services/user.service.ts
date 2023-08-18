@@ -2,6 +2,7 @@ const { User } = require("../database/models")
 import bcrypt from "bcrypt";
 
 interface UserData {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -33,10 +34,24 @@ export const UserService = {
     }
   },
 
-  async getUser(id: number): Promise<UserData> {
+  async getUserById(id: number): Promise<UserData> {
     try {
       const user = await User.findByPk(id, {
         attributes: { exclude: "password" },
+      });
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUser(data: string): Promise<UserData> {
+    try {
+      const user = await User.findOne({
+        where: { data },
       });
       if (!user) {
         throw new Error('User not found');
