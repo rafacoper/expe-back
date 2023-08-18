@@ -7,34 +7,19 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      firstName:{
+      firstName: {
         type: DataTypes.STRING,
-        field: "first_name",
       },
       lastName: {
         type: DataTypes.STRING,
-        field: "last_name",
       },
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
       birth: DataTypes.DATEONLY,
-      areacode: {
+      areaCode: {
         type: DataTypes.STRING,
-        field: "area_code",
       },
       password: DataTypes.STRING,
-      createdAt: {
-        type: DataTypes.DATE,
-        field: "created_at",
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        field: "updated_at",
-      },
-      deletedAt: {
-        type: DataTypes.DATE,
-        field: "deleted_at",
-      },
     },
     {
       paranoid: true,

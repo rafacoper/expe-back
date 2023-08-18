@@ -47,18 +47,22 @@ module.exports = {
         onDelete: "CASCADE",
       },
       createdAt: {
+        allowNull: true,
         type: Sequelize.DATE,
-        allowNull: false,
         defaultValue: Sequelize.NOW,
+        field: "created_at",
       },
       updatedAt: {
+        allowNull: true,
         type: Sequelize.DATE,
-        allowNull: false,
         defaultValue: Sequelize.NOW,
+        field: "updated_at",
       },
       deletedAt: {
-        type: Sequelize.DATE,
         allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "deleted_at",
       },
     });
   },

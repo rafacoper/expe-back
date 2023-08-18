@@ -4,7 +4,6 @@ module.exports = {
   async up(_queryInterface, _Sequelize) {
     const usersData = [
       {
-        id: 1,
         firstName: "User",
         lastName: "One",
         email: "userone@example.com",
@@ -15,7 +14,6 @@ module.exports = {
         createdAt: new Date(),
       },
       {
-        id: 2,
         firstName: "User",
         lastName: "Two",
         email: "usertwo@example.com",

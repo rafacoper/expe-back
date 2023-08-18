@@ -38,6 +38,24 @@ module.exports = {
       sellerList: {
         type: Sequelize.STRING,
       },
+      createdAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "created_at",
+      },
+      updatedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "updated_at",
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "deleted_at",
+      },
     });
   },
 
