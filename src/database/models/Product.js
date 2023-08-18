@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
-      name:{
+      name: {
         type: DataTypes.STRING,
       },
       code: {
@@ -28,9 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  // Product.associate = (models) => {
-  //   Product.hasMany(models.Grocery, { foreignKey: "user_id" });
-  // };
+  Product.associate = (models) => {
+    Product.hasMany(models.Seller, { foreignKey: "id", as: "seller" });
+    Product.hasMany(models.StandardizedProduct, {
+      foreignKey: "id",
+      as: "standardizedProduct",
+    });
+  };
 
   return Product;
 };

@@ -57,7 +57,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Grocery.associate = (models) => {
-    Grocery.belongsTo(models.User, { foreignKey: 'id' });
+    Grocery.belongsTo(models.User, { foreignKey: 'id', as: 'user' });
+    Grocery.belongsTo(models.Seller, { foreignKey: 'id', as: 'seller' });
   };
 
   return Grocery;

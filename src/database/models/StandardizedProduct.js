@@ -42,5 +42,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  StandardizedProduct.associate = (models) => {
+    StandardizedProduct.hasOne(models.Measurement, {
+      foreignKey: "measurementId",
+      as: "measurement",
+    });
+    StandardizedProduct.hasMany(models.Brand, {
+      foreignKey: "brandId",
+      as: "brand",
+    });
+  };
+
   return StandardizedProduct;
 };
