@@ -1,4 +1,6 @@
-const { User } = require("../database/models")
+// const  User = require("../database/models/UserModel")
+import User from '../database/models/UserModel'
+import { Model } from "sequelize/types";
 import bcrypt from "bcrypt";
 
 interface UserData {
@@ -12,7 +14,7 @@ interface UserData {
 }
 
 export const UserService = {
-  async getAllUsers(): Promise<UserData[]> {
+  async getAllUsers(): Promise<Model[]> {
     try {
       const result = await User.findAll();
       return result;
@@ -21,7 +23,7 @@ export const UserService = {
     }
   },
 
-  async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
+  async createUser(userData: Omit<UserData, "id">): Promise<Model> {
     try {
       const { password } = userData;
       const saltRounds = 10;
@@ -33,10 +35,10 @@ export const UserService = {
     }
   },
 
-  async getUser(id: number): Promise<UserData> {
+  async getUser(id: number): Promise<Model> {
     try {
       const user = await User.findByPk(id, {
-        attributes: { exclude: "password" },
+        // attributes: { exclude: "password" },
       });
       if (!user) {
         throw new Error('User not found');
@@ -62,7 +64,7 @@ export const UserService = {
         {
           where: { id } 
         },
-        user);
+      );
       return user;
     } catch (error) {
       throw error;

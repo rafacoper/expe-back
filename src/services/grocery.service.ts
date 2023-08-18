@@ -1,4 +1,7 @@
-const { Grocery } = require("../database/models")
+// const { Grocery } = require("../database/models")
+import { Model } from "sequelize/types";
+
+import Grocery from '../database/models/Grocery'
 
 interface GroceryData {
 	userId: number,
@@ -10,25 +13,25 @@ interface GroceryData {
 }
 
 export const GroceryService = {
-  async getAllGroceries(): Promise<GroceryData[]> {
+	async getAllGroceries(): Promise<Model[]> {
 		try {
 			const result = await Grocery.findAll();
 			return result;
 		} catch (error) {
-			throw error;	
+			throw error;
 		}
-  },
+	},
 
-  async createGrocery(groceryData: Omit<GroceryData, "id">): Promise<GroceryData> {
+	async createGrocery(groceryData: Omit<GroceryData, "id">): Promise<Model> {
 		try {
 			const groceryCreated = await Grocery.create(groceryData);
 			return groceryCreated;
 		} catch (error) {
-			throw error;	
+			throw error;
 		}
-  },
+	},
 
-  async getGrocery(id: number): Promise<GroceryData> {
+	async getGrocery(id: number): Promise<Model> {
 		try {
 			const grocery = await Grocery.findByPk(id)
 			if (!grocery) {
@@ -38,11 +41,11 @@ export const GroceryService = {
 		} catch (error) {
 			throw error;
 		}
-		
-  },
 
-  async updateGrocery(id: number, grocery: GroceryData): Promise<GroceryData> {
-    try {
+	},
+
+	async updateGrocery(id: number, grocery: GroceryData): Promise<GroceryData> {
+		try {
 			await Grocery.update(
 				{
 					userId: grocery.userId,
@@ -52,23 +55,22 @@ export const GroceryService = {
 					icmsBasis: grocery.icmsBasis,
 					productList: grocery.productList,
 				},
-				{ where: { id } },
-				grocery
+				{ where: { id } }
 			);
 			return grocery;
 		} catch (error) {
 			throw error
 		}
-  },
+	},
 
-  async deleteGrocery(id: number): Promise<void> {
+	async deleteGrocery(id: number): Promise<void> {
 		try {
 			await Grocery.destroy({
 				where: { id }
 			});
 		} catch (error) {
-			throw error;	
+			throw error;
 		}
-  },
+	},
 };
 
