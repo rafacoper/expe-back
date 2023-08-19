@@ -9,45 +9,27 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         type: DataTypes.INTEGER,
-        field: "user_id",
         allowNull: false, 
       },
       sellerId: {
         type: DataTypes.INTEGER,
-        field: "seller_id",
         allowNull: false,
       },
       totalValue: {
         type: DataTypes.DECIMAL(10, 2),
-        field: "total_value",
         allowNull: false,
       },
       icmsPaid: {
         type: DataTypes.DECIMAL(10, 2),
-        field: "icms_paid",
         allowNull: false,
       },
       icmsBasis: {
         type: DataTypes.DECIMAL(10, 2),
-        field: "icms_basis",
         allowNull: false,
       },
       productList: {
         type: DataTypes.TEXT,
-        field: "product_list",
         allowNull: false,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        field: "created_at",
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        field: "updated_at",
-      },
-      deletedAt: {
-        type: DataTypes.DATE,
-        field: "deleted_at",
       },
   },
   {
@@ -57,7 +39,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Grocery.associate = (models) => {
-    Grocery.belongsTo(models.User, { foreignKey: 'id' });
+    Grocery.belongsTo(models.User, { foreignKey: 'id', as: 'user' });
+    Grocery.belongsTo(models.Seller, { foreignKey: 'id', as: 'seller' });
   };
 
   return Grocery;

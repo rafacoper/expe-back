@@ -5,8 +5,13 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.ts",
-    "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/app.ts\""
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/app.ts\"",
+    "db:drop": "npx sequelize-cli db:drop",
+    "db:create": "npx sequelize-cli db:create",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate && npm run db:seed"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +23,7 @@
     "pg": "^8.11.2",
     "pg-pool": "^3.6.1",
     "sequelize": "^6.32.1",
-    "sequelize-cli": "^6.6.1"
+    "sequelize-typescript": "^2.1.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -28,6 +33,7 @@
     "eslint": "^6.8.0",
     "eslint-config-trybe-backend": "^1.0.1",
     "nodemon": "^3.0.1",
+    "sequelize-cli": "^6.6.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }
