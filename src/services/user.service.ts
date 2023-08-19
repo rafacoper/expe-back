@@ -1,5 +1,5 @@
 // const  User = require("../database/models/UserModel")
-import User from '../database/models/UserModel'
+import User from '../database/models/User'
 import { Model } from "sequelize/types";
 import bcrypt from "bcrypt";
 

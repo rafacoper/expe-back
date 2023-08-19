@@ -2,11 +2,11 @@ import { Model, DataTypes } from 'sequelize';
 
 import { sequelize } from '../config/config';
 
-export default class UserModel extends Model {
+export default class User extends Model {
 
 }
 
-UserModel.init({
+User.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

@@ -40,7 +40,7 @@ GroceryModel.init({
     allowNull: false,
   },
 }, {
-  sequelize: sequelize,
+  sequelize,
   paranoid: true,
   underscored: true,
   tableName: "groceries",
