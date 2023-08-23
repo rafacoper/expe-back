@@ -14,8 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       cnpj: {
         type: DataTypes.STRING,
       },
+      address: {
+        type: DataTypes.TEXT,
+      },
       stateIdentifier: {
         type: DataTypes.FLOAT,
+        field: "state_identifier",
       },
       state: DataTypes.STRING,
     },
@@ -27,8 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Seller.associate = (models) => {
-    Seller.hasMany(models.Product, { foreignKey: 'id', as: 'products' });
-    Seller.hasMany(models.Grocery, { foreignKey: 'id', as: 'grocery' });
+    Seller.hasMany(models.Invoice, { foreignKey: 'seller_id', as: 'seller' });
   }
   return Seller;
 };

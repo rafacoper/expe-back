@@ -11,15 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
       },
-      code: {
+      brandId: {
         type: DataTypes.STRING,
       },
-      quantity: {
-        type: DataTypes.FLOAT,
+      measurement: {
+        type: DataTypes.ENUM('UN', 'KG'),
       },
-      value: DataTypes.FLOAT,
-      sellerId: DataTypes.STRING,
-      standardizedProductId: DataTypes.INTEGER,
     },
     {
       paranoid: true,
@@ -29,12 +26,9 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Product.associate = (models) => {
-    Product.hasOne(models.Seller, { foreignKey: "id", as: "seller" });
-    Product.hasOne(models.StandardizedProduct, {
-      foreignKey: "StandardizedProductId",
-      as: "standardizedProduct",
-    });
-  };
+    Product.belongsTo(models.Brand, { foreignKey: 'brandId', as: 'brand' }); 
+    Product.belongsToMany(models.Purchase, { through: 'PurchaseProduct', foreignKey: 'productId', as: 'purchases' });
+};
 
   return Product;
 };

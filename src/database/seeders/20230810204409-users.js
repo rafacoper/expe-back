@@ -2,7 +2,7 @@ const { User } = require("../models")
 
 module.exports = {
   async up(_queryInterface, _Sequelize) {
-    const usersData = [
+    await queryInterface.bulkInsert("users", [
       {
         id: 1,
         firstName: "User",
@@ -10,8 +10,8 @@ module.exports = {
         email: "userone@example.com",
         phone: "1234567890",
         areaCode: "+1",
-        password: "password1",
         birth: "1990-11-01",
+        password: "password1",
         createdAt: new Date(),
       },
       {
@@ -21,13 +21,11 @@ module.exports = {
         email: "usertwo@example.com",
         phone: "9876543210",
         areaCode: "+1",
-        password: "password2",
         birth: "1995-05-10",
+        password: "password2",
         createdAt: new Date(),
       },
-    ];
-
-    await User.bulkCreate(usersData);
+    ]);
   },
 
   async down(queryInterface, _Sequelize) {

@@ -2,13 +2,19 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface, _Sequelize) {
     await queryInterface.bulkInsert("brands", [
       {
+        id: "1",
         name: "Arisco",
       },
       {
+        id: "2",
         name: "Bauducco",
+      },
+      {
+        id: "3",
+        name: "Colgate",
       },
     ]);
   },
