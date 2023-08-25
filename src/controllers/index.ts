@@ -1,2 +1,2 @@
 export * from "./user.controller";
-export * from "./grocery.controller";
+export * from "./purchase.controller";

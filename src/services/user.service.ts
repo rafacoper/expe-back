@@ -38,7 +38,7 @@ export const UserService = {
   async getUser(id: number): Promise<Model> {
     try {
       const user = await User.findByPk(id, {
-        // attributes: { exclude: "password" },
+        attributes: { exclude: "password" },
       });
       if (!user) {
         throw new Error('User not found');

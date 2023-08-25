@@ -1,13 +1,13 @@
 // src/routes/userRoutes.ts
 import { Router } from "express";
-import { GroceryController } from "../controllers/grocery.controller";
+import { PurchaseController } from "../controllers/purchase.controller";
 
 const router = Router();
 
-router.get("/", GroceryController.getAllGroceries);
-router.get("/:id", GroceryController.getGroceryById);
-router.post("/", GroceryController.createGrocery);
-router.put("/:id", GroceryController.updateGrocery);
-router.delete("/:id", GroceryController.deleteGrocery);
+router.get("/", PurchaseController.getAllpurchases);
+router.get("/:id", PurchaseController.getPurchaseById);
+router.post("/", PurchaseController.createPurchase);
+router.put("/:id", PurchaseController.updatePurchase);
+router.delete("/:id", PurchaseController.deletePurchase);
 
 export default router;

@@ -2,6 +2,7 @@
 import { Model } from "sequelize/types";
 
 import Purchase from "../database/models/Purchase";
+
 interface PurchaseData {
 	productId: number,
 	quantity: number,
@@ -20,7 +21,7 @@ export const PurchaseService = {
 		}
 	},
 
-	async createGrocery(PurchaseData: Omit<PurchaseData, "id">): Promise<Model> {
+	async createPurchase(PurchaseData: Omit<PurchaseData, "id">): Promise<Model> {
 		try {
 			const purchaseCreated = await Purchase.create(PurchaseData);
 			return purchaseCreated;
@@ -42,25 +43,30 @@ export const PurchaseService = {
 
 	},
 
-	async updatePurchase(id: number, purchase: PurchaseData): Promise<PurchaseData> {
+	async updatePurchase(id: number, data: PurchaseData): Promise<Purchase | null> {
 		try {
-			await Purchase.update(
+			const [affectedCount, updatedPurchaseArray] = await Purchase.update(
 				{
-					productId: Purchase.productId,
-					quantity: Purchase.quantity,
-					code: Purchase.code,
-					totalPrice: Purchase.totalPrice,
-					invoiceId: Purchase.invoiceId,
+					productId: data.productId,
+					quantity: data.quantity,
+					code: data.code,
+					totalPrice: data.totalPrice,
+					invoiceId: data.invoiceId,
 				},
-				{ where: { id } }
+				{ where: { id }, returning: true}
 			);
-			return purchase;
+			if (affectedCount > 0 && updatedPurchaseArray?.length > 0) {
+				const updatedPurchase = updatedPurchaseArray[0] as Purchase;
+				return updatedPurchase;
+			} else {
+				return null;
+			}
 		} catch (error) {
 			throw error
 		}
 	},
 
-	async deleteGrocery(id: number): Promise<void> {
+	async deletePurchase(id: number): Promise<void> {
 		try {
 			await Purchase.destroy({
 				where: { id }
