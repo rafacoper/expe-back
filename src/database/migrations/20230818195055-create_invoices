@@ -1,0 +1,60 @@
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("invoices", {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "user_id",
+        references: {
+          model: "user",
+          key: "id",
+        },
+      },
+      sellerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "seller_id",
+        references: {
+          model: "seller",
+          key: "id",
+        },
+      },
+      totalValue: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        field: "total_value",
+      },
+      createdAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "created_at",
+      },
+      updatedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "updated_at",
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: "deleted_at",
+      },
+    });
+  },
+
+  async down(queryInterface, _Sequelize) {
+    await queryInterface.dropTable("invoices");
+  },
+};

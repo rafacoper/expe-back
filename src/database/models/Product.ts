@@ -4,14 +4,8 @@ import { sequelize } from "../config/config";
 
 export default class Product extends Model {
   static associate(models: any) {
-    models.Product.hasMany(models.Seller, {
-      foreignKey: "id",
-      as: "seller",
-    });
-    models.Product.hasMany(models.StandardizedProduct, {
-      foreignKey: "id",
-      as: "standardizedProduct",
-    });
+    models.Product.belongsTo(models.Brand, { foreignKey: 'brandId', as: 'brand' });
+    models.Product.belongsToMany(models.Purchase, { through: 'PurchaseProduct', foreignKey: 'productId', as: 'purchases' });
   }
 }
 
@@ -23,21 +17,18 @@ Product.init(
       primaryKey: true,
       allowNull: false,
     },
-    name: DataTypes.STRING,
-    code: DataTypes.STRING,
-    quantity: DataTypes.INTEGER,
-    value: DataTypes.FLOAT,
-    sellerId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    name: {
+      type: DataTypes.STRING,
     },
-    standardizedProductId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    brandId: {
+      type: DataTypes.STRING,
+    },
+    measurement: {
+      type: DataTypes.ENUM('UN', 'KG'),
     },
   },
   {
-    sequelize: sequelize,
+    sequelize,
     paranoid: true,
     underscored: true,
     tableName: "products",

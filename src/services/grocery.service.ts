@@ -1,63 +1,60 @@
 // const { Grocery } = require("../database/models")
 import { Model } from "sequelize/types";
 
-import Grocery from '../database/models/Grocery'
-
-interface GroceryData {
-	userId: number,
-	sellerId: number,
-	totalValue: number,
-	icmsPaid: number
-	icmsBasis: number
-	productList: string
+import Purchase from "../database/models/Purchase";
+interface PurchaseData {
+	productId: number,
+	quantity: number,
+	code: number,
+	totalPrice: number
+	invoiceId: number,
 }
 
-export const GroceryService = {
-	async getAllGroceries(): Promise<Model[]> {
+export const PurchaseService = {
+	async getAllPurchases(): Promise<Model[]> {
 		try {
-			const result = await Grocery.findAll();
+			const result = await Purchase.findAll();
 			return result;
 		} catch (error) {
 			throw error;
 		}
 	},
 
-	async createGrocery(groceryData: Omit<GroceryData, "id">): Promise<Model> {
+	async createGrocery(PurchaseData: Omit<PurchaseData, "id">): Promise<Model> {
 		try {
-			const groceryCreated = await Grocery.create(groceryData);
-			return groceryCreated;
+			const purchaseCreated = await Purchase.create(PurchaseData);
+			return purchaseCreated;
 		} catch (error) {
 			throw error;
 		}
 	},
 
-	async getGrocery(id: number): Promise<Model> {
+	async getPurchase(id: number): Promise<Model> {
 		try {
-			const grocery = await Grocery.findByPk(id)
-			if (!grocery) {
-				throw new Error('Grocery not found');
+			const purchase = await Purchase.findByPk(id)
+			if (!purchase) {
+				throw new Error('purchase not found');
 			}
-			return grocery;
+			return purchase;
 		} catch (error) {
 			throw error;
 		}
 
 	},
 
-	async updateGrocery(id: number, grocery: GroceryData): Promise<GroceryData> {
+	async updatePurchase(id: number, purchase: PurchaseData): Promise<PurchaseData> {
 		try {
-			await Grocery.update(
+			await Purchase.update(
 				{
-					userId: grocery.userId,
-					sellerId: grocery.sellerId,
-					totalValue: grocery.totalValue,
-					icmsPaid: grocery.icmsPaid,
-					icmsBasis: grocery.icmsBasis,
-					productList: grocery.productList,
+					productId: Purchase.productId,
+					quantity: Purchase.quantity,
+					code: Purchase.code,
+					totalPrice: Purchase.totalPrice,
+					invoiceId: Purchase.invoiceId,
 				},
 				{ where: { id } }
 			);
-			return grocery;
+			return purchase;
 		} catch (error) {
 			throw error
 		}
@@ -65,7 +62,7 @@ export const GroceryService = {
 
 	async deleteGrocery(id: number): Promise<void> {
 		try {
-			await Grocery.destroy({
+			await Purchase.destroy({
 				where: { id }
 			});
 		} catch (error) {

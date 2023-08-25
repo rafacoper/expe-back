@@ -3,28 +3,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("sellers", {
+    await queryInterface.createTable("products", {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
+        primaryKey: true,
         allowNull: false,
       },
       name: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: DataTypes.STRING,
       },
-      cnpj: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      brandId: {
+        type: DataTypes.STRING,
+        field: "brand_id",
+        references: {
+          model: "brand",
+          key: "id",
+        },
       },
-      stateIdentifier: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      state: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      measurement: {
+        type: DataTypes.ENUM("UN", "KG"),
       },
       createdAt: {
         allowNull: true,
@@ -48,6 +46,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("sellers");
+    await queryInterface.dropTable("products");
   },
 };

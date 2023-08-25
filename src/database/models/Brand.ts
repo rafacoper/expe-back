@@ -8,10 +8,13 @@ Brand.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
     },
-    name: DataTypes.STRING,
+    name:{
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
