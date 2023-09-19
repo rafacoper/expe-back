@@ -1,71 +1,69 @@
+"use strict";
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("groceries", {
+    await queryInterface.createTable("purchases", {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
-      userId: {
+      productId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        field: "user_id",
+        field: "product_id",
         references: {
           model: {
-            tableName: 'users',
+            tableName: "products",
           },
           key: "id",
         },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
       },
-      sellerId: {
-        field: "seller_id",
+      quantity: {
+        type: Sequelize.FLOAT,
+      },
+      code: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      totalValue: {
-        field: "total_value",
+      totalprice: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
+        field: "total_price",
       },
-      icmsPaid: {
-        field: "icms_paid",
-        type: Sequelize.DECIMAL(10, 2),
+      invoiceId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      icmsBasis: {
-        field: "icms_basis",
-        type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
-      },
-      productList: {
-        field: "product_list",
-        type: Sequelize.TEXT,
-        allowNull: false,
+        field: "invoice_id",
+        references: {
+          model: {
+            tableName: "invoices",
+          },
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE,
-        field: "created_at",
         defaultValue: Sequelize.NOW,
+        field: "created_at",
       },
       updatedAt: {
         allowNull: true,
         type: Sequelize.DATE,
-        field: "updated_at",
         defaultValue: Sequelize.NOW,
+        field: "updated_at",
       },
       deletedAt: {
         allowNull: true,
         type: Sequelize.DATE,
-        field: "deleted_at",
         defaultValue: Sequelize.NOW,
+        field: "deleted_at",
       },
     });
   },
+
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("groceries");
+    await queryInterface.dropTable("standardized_products");
   },
 };

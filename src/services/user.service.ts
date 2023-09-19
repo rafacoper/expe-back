@@ -1,45 +1,38 @@
-const { User } = require("../database/models")
+// const  User = require("../database/models/UserModel")
+import User, { UserAttributes } from "../database/models/User";
+import { Model } from "sequelize/types";
 import bcrypt from "bcrypt";
 
-interface UserData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  areacode: string;
-  birth: Date;
-  password: string;
-}
-
 export const UserService = {
-  async getAllUsers(): Promise<UserData[]> {
+  async getAllUsers(): Promise<Model[]> {
     try {
       const result = await User.findAll();
       return result;
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
-  async createUser(userData: Omit<UserData, "id">): Promise<UserData> {
+  async createUser(userData: Omit<UserAttributes, "id">): Promise<Model> {
     try {
       const { password } = userData;
       const saltRounds = 10;
       const hashedPassword = bcrypt.hashSync(password, saltRounds);
-      const userCreated = await User.create({ ...userData, password: hashedPassword });
+      const userCreated = await User.create({
+        ...userData,
+        password: hashedPassword,
+      });
       return userCreated;
     } catch (error) {
       throw error;
     }
   },
 
-  async getUser(id: number): Promise<UserData> {
+  async getUser(id: number): Promise<Omit<User, "password">> {
     try {
-      const user = await User.findByPk(id, {
-        attributes: { exclude: "password" },
-      });
+      const user = await User.findByPk(id);
       if (!user) {
-        throw new Error('User not found');
+        throw new Error("User not found");
       }
       return user;
     } catch (error) {
@@ -47,7 +40,7 @@ export const UserService = {
     }
   },
 
-  async updateUser(id: number, user: UserData): Promise<UserData> {
+  async updateUser(id: number, user: UserAttributes): Promise<UserAttributes | null> {
     try {
       await User.update(
         {
@@ -55,14 +48,13 @@ export const UserService = {
           lastName: user.lastName,
           email: user.email,
           phone: user.phone,
-          areacode: user.areacode,
           birth: user.birth,
           password: user.password,
         },
         {
-          where: { id } 
-        },
-        user);
+          where: { id },
+        }
+      );
       return user;
     } catch (error) {
       throw error;
@@ -72,7 +64,7 @@ export const UserService = {
   async deleteUser(id: number): Promise<void> {
     try {
       await User.destroy({
-        where: { id }
+        where: { id },
       });
     } catch (error) {
       throw error;
