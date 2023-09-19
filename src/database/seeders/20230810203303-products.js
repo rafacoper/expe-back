@@ -7,12 +7,14 @@ module.exports = {
       {
         id: 1,
         name: "Batata Doce",
-        brandId: null
+        brandId: null,
+        createdAt: new Date(),
       },
       {
         id: 2,
         name: "Escova de dente",
-        brandId: 3
+        brandId: 3,
+        createdAt: new Date(),
       },
     ]);
   },

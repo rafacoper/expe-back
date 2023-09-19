@@ -7,14 +7,17 @@ module.exports = {
       {
         id: "1",
         name: "Arisco",
+        createdAt: new Date(),
       },
       {
         id: "2",
         name: "Bauducco",
+        createdAt: new Date(),
       },
       {
         id: "3",
         name: "Colgate",
+        createdAt: new Date(),
       },
     ]);
   },

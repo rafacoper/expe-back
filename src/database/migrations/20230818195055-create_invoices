@@ -1,35 +1,38 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("invoices", {
       id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
       userId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         field: "user_id",
         references: {
-          model: "user",
+          model: {
+            tableName: "users",
+          },
           key: "id",
         },
       },
       sellerId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         field: "seller_id",
         references: {
-          model: "seller",
+          model: {
+            tableName: "seller",
+          },
           key: "id",
         },
       },
       totalValue: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
         field: "total_value",
       },

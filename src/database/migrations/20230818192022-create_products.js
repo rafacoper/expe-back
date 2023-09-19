@@ -1,28 +1,29 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("products", {
       id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
       name: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       brandId: {
-        type: DataTypes.STRING,
+        type: Sequelize.INTEGER,
         field: "brand_id",
         references: {
-          model: "brand",
+          model: {
+            tableName: "brands",
+          },
           key: "id",
         },
       },
       measurement: {
-        type: DataTypes.ENUM("UN", "KG"),
+        type: Sequelize.ENUM("UN", "KG"),
       },
       createdAt: {
         allowNull: true,

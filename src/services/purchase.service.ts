@@ -1,18 +1,10 @@
 // const { Grocery } = require("../database/models")
 import { Model } from "sequelize/types";
 
-import Purchase from "../database/models/Purchase";
-
-interface PurchaseData {
-	productId: number,
-	quantity: number,
-	code: number,
-	totalPrice: number
-	invoiceId: number,
-}
+import Purchase, { PurchaseAttributes } from "../database/models/Purchase";
 
 export const PurchaseService = {
-	async getAllPurchases(): Promise<Model[]> {
+	async getAllPurchases(): Promise<PurchaseAttributes[]> {
 		try {
 			const result = await Purchase.findAll();
 			return result;
@@ -21,7 +13,7 @@ export const PurchaseService = {
 		}
 	},
 
-	async createPurchase(PurchaseData: Omit<PurchaseData, "id">): Promise<Model> {
+	async createPurchase(PurchaseData: Omit<PurchaseAttributes, "id">): Promise<Model> {
 		try {
 			const purchaseCreated = await Purchase.create(PurchaseData);
 			return purchaseCreated;
@@ -30,7 +22,7 @@ export const PurchaseService = {
 		}
 	},
 
-	async getPurchase(id: number): Promise<Model> {
+	async getPurchase(id: number): Promise<PurchaseAttributes> {
 		try {
 			const purchase = await Purchase.findByPk(id)
 			if (!purchase) {
@@ -43,7 +35,7 @@ export const PurchaseService = {
 
 	},
 
-	async updatePurchase(id: number, data: PurchaseData): Promise<Purchase | null> {
+	async updatePurchase(id: number, data: PurchaseAttributes): Promise<PurchaseAttributes | null> {
 		try {
 			const [affectedCount, updatedPurchaseArray] = await Purchase.update(
 				{

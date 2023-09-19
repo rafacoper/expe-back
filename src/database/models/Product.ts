@@ -1,13 +1,26 @@
-import { Model, DataTypes } from "sequelize";
-
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/config";
 
-export default class Product extends Model {
-  static associate(models: any) {
-    models.Product.belongsTo(models.Brand, { foreignKey: 'brandId', as: 'brand' });
-    models.Product.belongsToMany(models.Purchase, { through: 'PurchaseProduct', foreignKey: 'productId', as: 'purchases' });
-  }
+import Brand from "./Brand";
+import Purchase from "./Purchase";
+
+interface ProductAttributes {
+  id: number;
+  name: string;
+  brandId: number;
+  measurement: string;
 }
+
+class Product extends Model<ProductAttributes> implements ProductAttributes {
+  public id!: number;
+  public name!: string;
+  public brandId!: number;
+  public measurement!: string;
+
+  public readonly brand?: typeof Brand;
+  public readonly purchase?: typeof Purchase;
+}
+
 
 Product.init(
   {
@@ -21,7 +34,7 @@ Product.init(
       type: DataTypes.STRING,
     },
     brandId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     measurement: {
       type: DataTypes.ENUM('UN', 'KG'),
@@ -34,3 +47,8 @@ Product.init(
     tableName: "products",
   }
 );
+
+Product.belongsTo(Brand, { foreignKey: 'brandId' });
+Product.belongsToMany(Purchase, { through: 'PurchaseProduct', foreignKey: 'productId' });
+
+export default Product;

@@ -1,19 +1,30 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("measurements", [
+  async up (queryInterface, Sequelize) {
+    await queryInterface.bulkInsert("purchases", [
       {
-        abbreviation: "Kg",
+        id: 1,
+        productId: 1,
+        quantity: 5,
+        code: 34,
+        total: 130,
+        createdAt: new Date(),
       },
       {
-        abbreviation: "Un",
+        id: 2,
+        productId: 1,
+        quantity: 3,
+        code: 65,
+        total: 210,
+        createdAt: new Date(),
       },
     ]);
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("measurements", null, {});
-  },
+
+  async down (queryInterface, Sequelize) {
+    return queryInterface.bulkDelete('users', null, {});
+  }
 };

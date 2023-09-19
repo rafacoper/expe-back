@@ -16,7 +16,7 @@ module.exports = {
         field: "last_name" 
       },
       email: Sequelize.STRING,
-      phone: Sequelize.STRING,
+      phone: Sequelize.NUMBER,
       birth: Sequelize.DATEONLY,
       areacode: {
         type: Sequelize.STRING,

@@ -10,7 +10,8 @@ module.exports = {
         cnpj: "165326000145",
         stateIdentifier: "123456789",
         state: "MG",
-        address: "Rua dos Golfes, 232"
+        address: "Rua dos Golfes, 232",
+        createdAt: new Date(),
       },
       {
         id: 2,
@@ -18,7 +19,8 @@ module.exports = {
         cnpj: "785478000144",
         stateIdentifier: "123456789",
         state: "SP",
-        address: "Avenida dos Malabras, 67"
+        address: "Avenida dos Malabras, 67",
+        createdAt: new Date(),
       },
       {
         id: 3,
@@ -26,7 +28,8 @@ module.exports = {
         cnpj: "122382600013",
         stateIdentifier: "123456789",
         state: "RJ",
-        address: "Rua do Assalto, 98"
+        address: "Rua do Assalto, 98",
+        createdAt: new Date(),
       },
     ]);
   },

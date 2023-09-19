@@ -1,8 +1,19 @@
-import { Model, DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "../config/config.js";
 
-import { sequelize } from "../config/config";
+import Product from "./Product.js";
 
-export default class Brand extends Model {}
+interface BrandAttributes {
+  id: number;
+  name: string;
+}
+
+class Brand extends Model<BrandAttributes> implements BrandAttributes {
+  public id!: number;
+  public name!: string;
+
+  public readonly product?: typeof Product;
+}
 
 Brand.init(
   {
@@ -23,3 +34,7 @@ Brand.init(
     tableName: "brands",
   }
 );
+
+Brand.hasMany(Product, { foreignKey: 'brandId' });
+
+export default Brand;

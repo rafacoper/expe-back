@@ -1,11 +1,26 @@
-import { Model, DataTypes } from "sequelize";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../config/config';
 
-import { sequelize } from "../config/config";
+import Invoice from './Invoice';
 
-export default class Seller extends Model {
-  static associate(models: any) {
-    models.Seller.hasMany(models.Invoice, { foreignKey: 'seller_id', as: 'seller' });
-  }
+interface SellerAttributes {
+  id: number;
+  name: string;
+  cnpj: number;
+  address: string;
+  stateIdentifier: string;
+  state: string;
+}
+
+class Seller extends Model<SellerAttributes> implements SellerAttributes {
+  public id!: number;
+  public name!: string;
+  public cnpj!: number;
+  public address!: string;
+  public stateIdentifier!: string;
+  public state!: string;
+
+  public readonly invoice?: typeof Invoice;
 }
 
 Seller.init(
@@ -43,3 +58,7 @@ Seller.init(
     tableName: "sellers",
   }
 );
+
+Seller.hasMany(Invoice, { foreignKey: 'seller_id' })
+
+export default Seller;
